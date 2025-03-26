@@ -25,12 +25,3 @@ Spring Kafka: Integração do Spring com o Kafka para envio e recebimento de men
 Jakarta Bean Validation: Para validação dos dados de entrada.
 
 Lombok: Biblioteca para reduzir a verbosidade do código (ex: getters, setters e construtores).
-
-Pré-requisitos
-Antes de rodar a aplicação, verifique se você tem os seguintes itens instalados:
-
-JDK 17 ou superior.
-
-Apache Kafka em funcionamento (ou pode ser usado via Docker).
-
-Maven ou Gradle para gerenciamento de dependências e build.
