@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: transaction-producer-service
+
+transactions:
+  topic: TOPIC_TRANSACTIONS
