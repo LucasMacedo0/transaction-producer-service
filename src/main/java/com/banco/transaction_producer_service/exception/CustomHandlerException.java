@@ -15,13 +15,18 @@ public class CustomHandlerException {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
-
-        List<TransactionException> errors = new ArrayList<>();
+        // Lista para coletar os erros de validação
+        List<String> errorDetails = new ArrayList<>();
+        // Itera pelos erros de validação e formata os detalhes
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(new TransactionException(error.getField(), error.getDefaultMessage()));
+            errorDetails.add(String.format("Campo: %s - Erro: %s", error.getField(), error.getDefaultMessage()));
         }
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body(new TransactionException("Erros de validação", errors.toString()));
-
+        // Criação da exceção TransactionException com a lista de erros
+        TransactionException response = new TransactionException(
+                "Verifique os campos inválidos",
+                "Erro na Requisição",
+                errorDetails
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
     }
 }

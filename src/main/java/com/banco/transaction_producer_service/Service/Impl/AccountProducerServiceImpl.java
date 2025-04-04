@@ -1,6 +1,6 @@
 package com.banco.transaction_producer_service.Service.Impl;
 
-import com.banco.transaction_producer_service.Controller.domain.AccountDTO;
+import com.banco.transaction_producer_service.domain.AccountDTO;
 import com.banco.transaction_producer_service.Service.AccountProducerService;
 import com.banco.transaction_producer_service.exception.TransactionException;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class AccountProducerServiceImpl implements AccountProducerService {
     public void publishAccount(AccountDTO accountDTO) {
         try {
             // Gerar UUID para a mensagem
-            String messageKey = UUID.randomUUID().toString();
+            String messageKey = UUID.nameUUIDFromBytes(accountDTO.getAccountNumber().getBytes()).toString();
             // Enviar mensagem ao Kafka usando o UUID como chave
             kafkaTemplate.send(TRANSACTIONS_TOPIC, messageKey, accountDTO);
             log.info("Mensagem enviada ao Tópico: {} com UUID: {}", TRANSACTIONS_TOPIC, messageKey);

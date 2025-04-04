@@ -1,6 +1,6 @@
 package com.banco.transaction_producer_service.Controller;
 
-import com.banco.transaction_producer_service.Controller.domain.AccountDTO;
+import com.banco.transaction_producer_service.domain.AccountDTO;
 import com.banco.transaction_producer_service.Service.AccountProducerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

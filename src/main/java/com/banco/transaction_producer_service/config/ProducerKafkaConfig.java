@@ -1,6 +1,6 @@
 package com.banco.transaction_producer_service.config;
 
-import com.banco.transaction_producer_service.Controller.domain.AccountDTO;
+import com.banco.transaction_producer_service.domain.AccountDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

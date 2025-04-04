@@ -1,11 +1,8 @@
-package com.banco.transaction_producer_service.Controller.domain;
+package com.banco.transaction_producer_service.domain;
 
 import jakarta.validation.constraints.*;
 
 public class UserDTO {
-
-    @NotNull(message = "O ID do usuário não pode ser nulo.")
-    private Long id;                // Identificador único do usuário
 
     @NotBlank(message = "O nome completo é obrigatório.")
     @Size(min = 3, max = 100, message = "O nome completo deve ter entre 3 e 100 caracteres.")

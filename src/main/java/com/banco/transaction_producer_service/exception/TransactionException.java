@@ -4,18 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 public class TransactionException extends RuntimeException{
 
-    private String detail;
-    private String title;
-    private Integer code;
+    private String detail; // Informação detalhada do erro
+    private String title;  // Título ou categoria do erro
+    private Integer code;  // Código específico do erro
+    private List<String> errors; // (Opcional) Lista de erros detalhados
 
-    public TransactionException(String detail, String title) {
+    // Construtor com todos os itens
+    public TransactionException(String detail, String title, Integer code) {
         this.detail = detail;
         this.title = title;
-        this.code = 422;
+        this.code = code;
     }
+
+    // Construtor simplificado para receber lista de erros
+    public TransactionException(String detail, String title, List<String> errors) {
+        this.detail = detail;
+        this.title = title;
+        this.errors = errors;
+    }
+
 }
