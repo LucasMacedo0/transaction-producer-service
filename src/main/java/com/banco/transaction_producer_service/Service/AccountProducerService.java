@@ -1,10 +1,10 @@
 package com.banco.transaction_producer_service.Service;
 
 
-import com.banco.transaction_producer_service.domain.AccountDTO;
+import com.banco.transaction_producer_service.domain.DepositRequest;
 
 public interface AccountProducerService {
 
-    void publishAccount(AccountDTO accountDTO);
+    void publishAccount(DepositRequest accountDTO);
 
 }

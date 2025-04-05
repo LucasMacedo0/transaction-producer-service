@@ -13,6 +13,8 @@ spring:
     swagger-ui:
       enabled: true
       path: /swagger-ui/index.html
-
+server:
+  servlet:
+    context-path: /producer-service
 transactions:
   topic: TOPIC_TRANSACTIONS

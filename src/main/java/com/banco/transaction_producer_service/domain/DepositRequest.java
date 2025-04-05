@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class AccountDTO {
+public class DepositRequest {
 
     @NotBlank(message = "Número da conta não pode ser vazio.")
     private String accountNumber;   // Número único da conta
@@ -28,5 +28,5 @@ public class AccountDTO {
 
     @Valid
     @NotNull(message = "proprietário é obrigatorio")
-    private UserDTO owner;          // Proprietário da conta
+    private User owner;          // Proprietário da conta
 }

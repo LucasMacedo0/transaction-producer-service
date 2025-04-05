@@ -2,7 +2,7 @@ package com.banco.transaction_producer_service.domain;
 
 import jakarta.validation.constraints.*;
 
-public class UserDTO {
+public class User {
 
     @NotBlank(message = "O nome completo é obrigatório.")
     @Size(min = 3, max = 100, message = "O nome completo deve ter entre 3 e 100 caracteres.")
