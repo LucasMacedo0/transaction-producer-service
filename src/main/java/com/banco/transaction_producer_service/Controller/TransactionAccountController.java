@@ -20,7 +20,6 @@ import java.util.List;
 @Tag(name = "TransactionAccountController", description = "API responsável por enviar transações de contas para o tópico Kafka.")
 public class TransactionAccountController {
 
-
     @Autowired
     private final TransactionProducerService transactionProducerService;
 

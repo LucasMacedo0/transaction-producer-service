@@ -1,5 +1,6 @@
 package com.banco.transaction_producer_service.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -21,8 +22,11 @@ public class TransactionWithAccount {
     @Positive(message = "O valor da transação deve ser positivo.")
     private Double amount;
 
-    @NotEmpty(message = "O tipo da transação é obrigatório.")
-    private String transactionType;
+    @JsonIgnore
+    private TransactionTypeEnum transactionType;
 
+    @NotEmpty(message = "O número da conta de destino não pode ser vazio.")
+    @Size(min = 6, max = 20, message = "O número da conta de destino deve ter entre 6 e 20 caracteres.")
+    private String targetAccountNumber;
 
 }

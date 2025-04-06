@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TransactionProducerService {
 
-    void publishTransaction(@Valid List<TransactionWithAccount> transaction);
+    void publishTransaction(TransactionWithAccount transaction);
 
 }
