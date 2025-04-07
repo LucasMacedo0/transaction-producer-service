@@ -87,14 +87,13 @@ src/
 ├── main/
 │   ├── java/
 │   │   └── com.example.transactionproducerservice
-│   │       ├── controller/       # Controllers da aplicação
-│   │       ├── service/          # Lógica de negócio
-│   │       ├── model/            # Modelos das entidades (Ex.: DepositRequest, TransactionWithAccount)
-│   │       ├── producer/         # Comunicação e envio de mensagens para Kafka
-│   │       └── config/           # Configurações (Kafka, Application)
+│   │       ├── config/           # Configurações (Kafka, Application)
+│   │       ├── Controller/       # Endpoints
+│   │       ├── domain/           # Modelos de Dominio (Ex.: DepositRequest, TransactionWithAccount)
+│   │       ├── Exception/        # Tratamento das Exceções
+│   │       └── Service/          # Lógica de negócio
 │   └── resources/
 │       ├── application.yml       # Configurações do ambiente
-│       └── logback-spring.xml    # Configuração de logs
 └── test/                         # Testes unitários e de integração
 ```
 ## **Fluxo de Comunicação da API**
