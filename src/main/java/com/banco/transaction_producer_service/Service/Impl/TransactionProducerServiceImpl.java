@@ -19,11 +19,10 @@ import java.util.UUID;
 @Slf4j
 public class TransactionProducerServiceImpl implements TransactionProducerService {
 
-    @Autowired
-    private final KafkaTemplate<String, TransactionWithAccount> kafkaTemplate;
+    private KafkaTemplate<String, TransactionWithAccount> kafkaTemplate;
 
     @Value("${transactions.topic}")
-    private final String TRANSACTIONS_TOPIC;
+    private String TRANSACTIONS_TOPIC;
 
     @Override
     public void publishTransaction(TransactionWithAccount transaction) {

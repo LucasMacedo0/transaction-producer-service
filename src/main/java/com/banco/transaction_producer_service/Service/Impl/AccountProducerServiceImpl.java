@@ -18,11 +18,11 @@ import java.util.UUID;
 @Slf4j
 public class AccountProducerServiceImpl implements AccountProducerService {
 
-    @Autowired
-    private final KafkaTemplate<String, DepositRequest> kafkaTemplate;
+
+    private KafkaTemplate<String, DepositRequest> kafkaTemplate;
 
     @Value("${transactions.topic}")
-    private final String TRANSACTIONS_TOPIC;
+    private String TRANSACTIONS_TOPIC;
 
     @Override
     public void publishAccount(DepositRequest depositRequest) {
