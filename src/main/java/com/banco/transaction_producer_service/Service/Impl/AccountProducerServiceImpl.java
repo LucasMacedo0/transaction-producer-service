@@ -18,7 +18,7 @@ import java.util.UUID;
 @Slf4j
 public class AccountProducerServiceImpl implements AccountProducerService {
 
-
+    @Autowired
     private KafkaTemplate<String, DepositRequest> kafkaTemplate;
 
     @Value("${transactions.topic}")
@@ -33,7 +33,7 @@ public class AccountProducerServiceImpl implements AccountProducerService {
             kafkaTemplate.send(TRANSACTIONS_TOPIC, messageKey, depositRequest);
             log.info("Mensagem enviada ao Tópico: {} com UUID: {}", TRANSACTIONS_TOPIC, messageKey);
         } catch (Exception e) {
-            log.error("Erro ao enviar mensagem ao Tópico {}: {}", TRANSACTIONS_TOPIC, e.getMessage());
+            log.error("Erro ao enviar mensagem ao Tópico {}:", TRANSACTIONS_TOPIC);
             throw new TransactionException("Erro na comunicação com o kafka", "Não foi possivel enviar a mensagem de atualização ao tópico Kafka.", HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         }

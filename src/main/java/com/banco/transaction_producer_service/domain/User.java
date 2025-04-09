@@ -1,6 +1,7 @@
 package com.banco.transaction_producer_service.domain;
 
 import jakarta.validation.constraints.*;
+import lombok.Data;
 
 public class User {
 
@@ -8,9 +9,9 @@ public class User {
     @Size(min = 3, max = 100, message = "O nome completo deve ter entre 3 e 100 caracteres.")
     private String fullName;        // Nome completo
 
-    @NotBlank(message = "O número do documento é obrigatório.")
-    @Pattern(regexp = "^(\\d{11}|\\d{14})$", message = "O CPF ou CNPJ deve ter 11 ou 14 dígitos.")
-    private String documentNumber;  // CPF ou CNPJ
+    @NotBlank(message = "CPF ou CNPJ não pode ser vazio.")
+    @Pattern(regexp = "^(\\d{11}|\\d{14})$", message = "CPF ou CNPJ deve ter 11 ou 14 dígitos.")
+    private String cpfCnpj;         // CPF (11 dígitos) ou CNPJ (14 dígitos)
 
     @NotBlank(message = "O e-mail é obrigatório.")
     @Email(message = "O e-mail informado não é válido.")

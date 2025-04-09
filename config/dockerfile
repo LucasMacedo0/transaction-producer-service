@@ -1,11 +1,9 @@
-# Usar uma imagem do Java como base
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk
 
-# Define o diretório de trabalho dentro do container
+COPY . .
+
 WORKDIR /app
 
-# Copia o .jar gerado pela sua aplicação para dentro do container
-COPY target/transaction_producer_service.jar app.jar
+ENTRYPOINT ["java", "-jar", "order-event-producer.jar"]
 
-# Define o comando para rodar sua aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+EXPOSE 8080

@@ -27,10 +27,6 @@ public class DepositRequest {
     @Positive(message = "O valor do depósito deve ser maior que zero.")
     private Double amount;
 
-    @NotBlank(message = "CPF ou CNPJ não pode ser vazio.")
-    @Pattern(regexp = "^(\\d{11}|\\d{14})$", message = "CPF ou CNPJ deve ter 11 ou 14 dígitos.")
-    private String cpfCnpj;         // CPF (11 dígitos) ou CNPJ (14 dígitos)
-
     @Valid
     @NotNull(message = "proprietário é obrigatorio")
     private User owner;          // Proprietário da conta
