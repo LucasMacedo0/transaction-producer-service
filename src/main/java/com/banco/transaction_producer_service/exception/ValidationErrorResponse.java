@@ -1,23 +1,26 @@
 package com.banco.transaction_producer_service.exception;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@Getter
+@Schema(description = "Modelo de resposta para erros de validação e exceções")
+@Data
 @Builder
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ValidationErrorResponse {
 
+    @Schema(description = "Título do erro", example = "Erro na Requisição")
     private String title;
+
+    @Schema(description = "Descrição detalhada do erro", example = "Verifique os campos inválidos")
     private String detail;
+
+    @Schema(description = "Código HTTP do erro", example = "422")
     private int code;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
+    @Schema(description = "Lista de erros específicos nos campos da requisição")
     private List<String> errors;
-
-
 }

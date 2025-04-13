@@ -49,13 +49,6 @@ A `transaction-producer-service` processa requisições HTTP para criar transaç
       "amount": 250.75
   }
 ```
-## **Tecnologias Utilizadas**
-- 🚀 **Spring Boot:** Framework principal para o desenvolvimento da API.
-- 💬 **Apache Kafka:** Sistema de mensagens para comunicação entre produtores e consumidores.
-- 🛠️ **Spring Kafka:** Integração entre Spring e Kafka para facilitar o envio de mensagens.
-- ✔ **Jakarta Bean Validation:** Para validação dos dados recebidos nas requisições.
-- ✍️ **Lombok:** Redução da verbosidade do código com geração automática de getters, setters e outros utilitários.
-
 ## **Como Executar o Projeto**
 ### 1. **Pré-requisitos**
 - Java 17+.
@@ -67,7 +60,7 @@ No arquivo `application.yml`, insira a configuração para conexão com o Kafka:
 ``` yaml
 spring:
   kafka:
-    bootstrap-servers: <SEU_SERVIDOR_KAFKA>
+    bootstrap-servers: <SERVIDOR_KAFKA>
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -98,7 +91,10 @@ src/
 ```
 ## **Fluxo de Comunicação da API**
 Abaixo está o **fluxo simplificado** de como as requisições são processadas pela API e enviadas para o Kafka:
-1. O cliente realiza uma requisição HTTP com os dados da transação.
+1. O cliente realiza uma requisição HTTP com os dados da transação ou deposito.
 2. A API recebe e valida os dados.
-3. Após validação, a transação é enviada para o tópico Kafka configurado.
+3. Após validação, a transação ou o deposito é enviada para o tópico Kafka configurado.
 4. Outros serviços registrados no Kafka consomem as mensagens publicadas para processamento posterior.
+
+## **Swagger**
+ http://localhost:8080/producer-service/swagger-ui/index.html
