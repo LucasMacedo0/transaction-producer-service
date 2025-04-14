@@ -21,7 +21,7 @@ public class AccountProducerServiceImpl implements AccountProducerService {
     @Autowired
     private KafkaTemplate<String, DepositRequest> kafkaTemplate;
 
-    @Value("${transactions.topic}")
+    @Value("${topics.transactions}")
     private String TRANSACTIONS_TOPIC;
 
     @Override

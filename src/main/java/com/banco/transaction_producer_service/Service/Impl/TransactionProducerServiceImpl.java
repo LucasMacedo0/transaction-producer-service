@@ -21,7 +21,7 @@ public class TransactionProducerServiceImpl implements TransactionProducerServic
 
     private KafkaTemplate<String, TransactionWithAccount> kafkaTemplate;
 
-    @Value("${transactions.topic}")
+    @Value("${topics.transactions}")
     private String TRANSACTIONS_TOPIC;
 
     @Override
