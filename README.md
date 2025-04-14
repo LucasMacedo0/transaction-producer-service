@@ -56,14 +56,7 @@ A `transaction-producer-service` processa requisições HTTP para criar transaç
 - Maven 3.x instalado.
 
 ### 2. **Configurações do Kafka**
-No arquivo `application.yml`, insira a configuração para conexão com o Kafka:
-``` yaml
-spring:
-  kafka:
-    bootstrap-servers: <SERVIDOR_KAFKA>
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
 ```
 ### 3. **Build e Execução**
 - Compile o projeto com Maven:

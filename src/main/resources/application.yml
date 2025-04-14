@@ -17,5 +17,5 @@ server:
   servlet:
     context-path: /producer-service
 
-transactions:
-  topic: TOPIC_TRANSACTIONS
+topics:
+  transactions: ${TOPICO_TRANSACOES}
