@@ -8,9 +8,9 @@
 		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.banco</groupId>
+	<groupId>com.lucas</groupId>
 	<artifactId>transaction-producer-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>transaction-producer-service</name>
 	<description>Serviço responsável por publicar depositos e transações no Kafka.</description>
 	<url/>
@@ -107,6 +107,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>transaction-producer-service</finalName>
 	</build>
 
 </project>
