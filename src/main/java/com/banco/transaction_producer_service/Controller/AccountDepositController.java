@@ -44,7 +44,7 @@ public class AccountDepositController {
     @PostMapping("/deposits")
     public ResponseEntity<DepositRequest> depositAccount(@Valid @RequestBody DepositRequest depositRequest){
         accountProducerService.publishAccount(depositRequest);
-        return ResponseEntity.ok(depositRequest);
+        return ResponseEntity.ok().build();
     };
 }
 

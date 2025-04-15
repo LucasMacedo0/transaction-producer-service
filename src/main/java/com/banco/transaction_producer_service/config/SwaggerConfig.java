@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Sistema Bancário - API Produtora",
-                version = "1.0",
+                title = "API Produtora de Depósitos e Transações",
                 description = "API responsável por enviar depósitos e transações para o Kafka.",
-                contact = @Contact(name = "Lucas Dev", email = "lm818352@gmail.com"),
+                contact = @Contact(
+                        name = "Lucas Dev", url = "https://www.linkedin.com/in/lucas-macedo-2a90171ba/" ),
                 license = @License(name = "Apache 2.0", url = "http://springdoc.org")
         )
 )

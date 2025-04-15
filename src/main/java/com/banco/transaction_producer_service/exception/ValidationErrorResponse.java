@@ -22,5 +22,6 @@ public class ValidationErrorResponse {
     private int code;
 
     @Schema(description = "Lista de erros específicos nos campos da requisição")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> errors;
 }

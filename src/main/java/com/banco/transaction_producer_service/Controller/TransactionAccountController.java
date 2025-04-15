@@ -47,7 +47,7 @@ public class TransactionAccountController {
     @PostMapping("/transactions")
     public ResponseEntity<TransactionWithAccount> transactionAccount(@Valid @RequestBody TransactionWithAccount transaction){
         transactionProducerService.publishTransaction(transaction);
-        return ResponseEntity.ok(transaction);
+        return ResponseEntity.ok().build();
 
     }
 
