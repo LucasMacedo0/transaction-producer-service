@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "TransactionAccountController", description = "API responsável por enviar transações de contas para o tópico Kafka.")
@@ -45,7 +43,7 @@ public class TransactionAccountController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorResponse.class)))
     })
     @PostMapping("/transactions")
-    public ResponseEntity<TransactionWithAccount> transactionAccount(@Valid @RequestBody TransactionWithAccount transaction){
+    public ResponseEntity<TransactionWithAccount> transactionAccount(@Valid @RequestBody TransactionWithAccount transaction) {
         transactionProducerService.publishTransaction(transaction);
         return ResponseEntity.ok().build();
 

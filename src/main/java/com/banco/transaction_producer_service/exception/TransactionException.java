@@ -1,6 +1,9 @@
 package com.banco.transaction_producer_service.exception;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -8,7 +11,7 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
-public class TransactionException extends RuntimeException{
+public class TransactionException extends RuntimeException {
 
     private String detail; // Informação detalhada do erro
     private String title;  // Título ou categoria do erro

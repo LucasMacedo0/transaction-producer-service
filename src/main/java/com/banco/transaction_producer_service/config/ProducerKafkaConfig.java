@@ -21,33 +21,30 @@ public class ProducerKafkaConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Bean
-    public ProducerFactory<String, DepositRequest> depositProducerFactory() {
+    private Map<String, Object> producerConfigs() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProps);
+        return configProps;
+    }
+
+    public <T> ProducerFactory<String, T> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
+
+    public <T> KafkaTemplate<String, T> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
-    public ProducerFactory<String, TransactionWithAccount> transactionProducerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(configProps);
-    }
-
-
-    @Bean
-    public KafkaTemplate<String, DepositRequest> kafkaTemplate() {
-        return new KafkaTemplate<>(depositProducerFactory());
+    public KafkaTemplate<String, DepositRequest> depositKafkaTemplate() {
+        return kafkaTemplate();
     }
 
     @Bean
     public KafkaTemplate<String, TransactionWithAccount> transactionKafkaTemplate() {
-        return new KafkaTemplate<>(transactionProducerFactory());
+        return kafkaTemplate();
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class TransactionProducerServiceImpl implements TransactionProducerService {
-    
+
     @Autowired
     private KafkaTemplate<String, TransactionWithAccount> kafkaTemplate;
 

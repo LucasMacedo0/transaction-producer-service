@@ -4,6 +4,8 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
+      retries: 3 #numero de tentativas
+      retry-backoff-ms: 1000 #tempo de espera enter tentativas (1s)
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   doc:
@@ -16,6 +18,15 @@ spring:
 server:
   servlet:
     context-path: /producer-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics, info
+  endpoint:
+    health:
+      show-details: always
 
 topics:
   transactions: ${TOPICO_TRANSACOES:TOPIC_TRANSACTIONS}

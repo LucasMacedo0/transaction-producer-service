@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
                 title = "API Produtora de Depósitos e Transações",
                 description = "API responsável por enviar depósitos e transações para o Kafka.",
                 contact = @Contact(
-                        name = "Lucas Dev", url = "https://www.linkedin.com/in/lucas-macedo-2a90171ba/" ),
+                        name = "Lucas Dev", url = "https://www.linkedin.com/in/lucas-macedo-2a90171ba/"),
                 license = @License(name = "Apache 2.0", url = "http://springdoc.org")
         )
 )

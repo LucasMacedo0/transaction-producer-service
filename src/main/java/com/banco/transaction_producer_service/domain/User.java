@@ -2,8 +2,10 @@ package com.banco.transaction_producer_service.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 @Schema(description = "Representa um usuário no sistema", required = true)
 public class User {
@@ -25,7 +27,7 @@ public class User {
 
     @NotBlank(message = "O número de telefone é obrigatório.")
     @Pattern(regexp = "^\\(\\d{2}\\) \\d{4,5}-\\d{4}$", message = "O número de telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.")
-    @Schema(description = "Número de telefone de contato", example = "(11) 98765-4321", required = true)
+    @Schema(description = "Número de telefone de contato", example = "(11) 00000-0000", required = true)
     private String phoneNumber;
 
 }

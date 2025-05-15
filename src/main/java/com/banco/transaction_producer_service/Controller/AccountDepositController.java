@@ -1,7 +1,7 @@
 package com.banco.transaction_producer_service.Controller;
 
-import com.banco.transaction_producer_service.domain.DepositRequest;
 import com.banco.transaction_producer_service.Service.AccountProducerService;
+import com.banco.transaction_producer_service.domain.DepositRequest;
 import com.banco.transaction_producer_service.exception.ValidationErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -42,7 +42,7 @@ public class AccountDepositController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorResponse.class)))
     })
     @PostMapping("/deposits")
-    public ResponseEntity<DepositRequest> depositAccount(@Valid @RequestBody DepositRequest depositRequest){
+    public ResponseEntity<DepositRequest> depositAccount(@Valid @RequestBody DepositRequest depositRequest) {
         accountProducerService.publishAccount(depositRequest);
         return ResponseEntity.ok().build();
     };

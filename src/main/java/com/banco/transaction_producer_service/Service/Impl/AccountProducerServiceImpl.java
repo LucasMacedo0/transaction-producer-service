@@ -1,7 +1,8 @@
 package com.banco.transaction_producer_service.Service.Impl;
 
-import com.banco.transaction_producer_service.domain.DepositRequest;
 import com.banco.transaction_producer_service.Service.AccountProducerService;
+import com.banco.transaction_producer_service.domain.DepositRequest;
+import com.banco.transaction_producer_service.exception.KafkaProducerErrorHandler;
 import com.banco.transaction_producer_service.exception.TransactionException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,19 +22,25 @@ public class AccountProducerServiceImpl implements AccountProducerService {
     @Autowired
     private KafkaTemplate<String, DepositRequest> kafkaTemplate;
 
+    @Autowired
+    private KafkaProducerErrorHandler kafkaProducerErrorHandler;
+
     @Value("${topics.transactions}")
     private String TRANSACTIONS_TOPIC;
 
     @Override
     public void publishAccount(DepositRequest depositRequest) {
+        // Gerar UUID para a mensagem
+        String messageKey = UUID.nameUUIDFromBytes(depositRequest.getAccountNumber().getBytes()).toString();
+
         try {
-            // Gerar UUID para a mensagem
-            String messageKey = UUID.nameUUIDFromBytes(depositRequest.getAccountNumber().getBytes()).toString();
             // Enviar mensagem ao Kafka usando o UUID como chave
             kafkaTemplate.send(TRANSACTIONS_TOPIC, messageKey, depositRequest);
             log.info("Mensagem enviada ao Tópico: {} com UUID: {}", TRANSACTIONS_TOPIC, messageKey);
+
         } catch (Exception e) {
             log.error("Erro ao enviar mensagem ao Tópico {}:", TRANSACTIONS_TOPIC);
+            kafkaProducerErrorHandler.handleFailedMessage(TRANSACTIONS_TOPIC, messageKey, e);
             throw new TransactionException("Erro na comunicação com o kafka", "Não foi possivel enviar a mensagem de atualização ao tópico Kafka.", HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         }

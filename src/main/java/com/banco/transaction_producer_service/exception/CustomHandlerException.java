@@ -7,17 +7,14 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestControllerAdvice
 @Slf4j
 public class CustomHandlerException {
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
@@ -68,10 +65,12 @@ public class CustomHandlerException {
     // Tratamento genérico para exceções não previstas (evita stack trace)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleException(Exception ex) {
+        log.error("Erro não tratado: ", ex);
         String message = "Ocorreu um erro inesperado";
         var transactionException = getTransactionException(ex, message, "Erro Interno", HttpStatus.INTERNAL_SERVER_ERROR, null);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(transactionException);
     }
+
 
     //Metodo utilitário reutilizado para construir a resposta de erro (ValidationErrorResponse)
     private static ValidationErrorResponse getTransactionException(Exception ex, String message, String title, HttpStatus status, List<String> fieldErrors) {
