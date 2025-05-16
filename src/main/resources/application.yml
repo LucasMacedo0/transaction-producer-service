@@ -4,10 +4,14 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
+      #Retries no YML afeta apenas o consumo (@KafkaListener), não send() então implementei tbm nos sends
       retries: 3 #numero de tentativas
-      retry-backoff-ms: 1000 #tempo de espera enter tentativas (1s)
+      retry-backoff-ms: 5000 #tempo de espera enter tentativas (5s)
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  redis:
+    host: localhost
+    port: 6379
   doc:
     api-docs:
       enabled: true

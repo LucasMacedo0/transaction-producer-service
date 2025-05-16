@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -28,21 +30,21 @@ public class AccountProducerServiceImpl implements AccountProducerService {
     @Value("${topics.transactions}")
     private String TRANSACTIONS_TOPIC;
 
+    @Retryable(
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 5000)
+    )
     @Override
     public void publishAccount(DepositRequest depositRequest) {
-        // Gerar UUID para a mensagem
         String messageKey = UUID.nameUUIDFromBytes(depositRequest.getAccountNumber().getBytes()).toString();
-
         try {
-            // Enviar mensagem ao Kafka usando o UUID como chave
             kafkaTemplate.send(TRANSACTIONS_TOPIC, messageKey, depositRequest);
             log.info("Mensagem enviada ao Tópico: {} com UUID: {}", TRANSACTIONS_TOPIC, messageKey);
 
         } catch (Exception e) {
             log.error("Erro ao enviar mensagem ao Tópico {}:", TRANSACTIONS_TOPIC);
             kafkaProducerErrorHandler.handleFailedMessage(TRANSACTIONS_TOPIC, messageKey, e);
-            throw new TransactionException("Erro na comunicação com o kafka", "Não foi possivel enviar a mensagem de atualização ao tópico Kafka.", HttpStatus.INTERNAL_SERVER_ERROR.value());
-
+            log.error("Erro tratado e mensagem redirecionada para DLT.");
         }
     }
 
