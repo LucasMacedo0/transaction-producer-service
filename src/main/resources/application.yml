@@ -9,9 +9,11 @@ spring:
       retry-backoff-ms: 5000 #tempo de espera enter tentativas (5s)
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-  redis:
-    host: localhost
-    port: 6379
+    listener:
+      ack-mode: record
+      retry:
+        max-attempts: 1
+
   doc:
     api-docs:
       enabled: true

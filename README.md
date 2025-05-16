@@ -75,11 +75,33 @@ src/
 └── test/                         # Testes unitários e de integração
 ```
 ## **Fluxo de Comunicação da API**
-Abaixo está o **fluxo simplificado** de como as requisições são processadas pela API e enviadas para o Kafka:
-1. O cliente realiza uma requisição HTTP com os dados da transação ou deposito.
-2. A API recebe e valida os dados.
-3. Após validação, a transação ou o deposito é enviada para o tópico Kafka configurado.
-4. Outros serviços registrados no Kafka consomem as mensagens publicadas para processamento posterior.
+Abaixo está um resumo de como funciona o fluxo da API ao processar uma transação ou depósito, e também como lidamos com falhas:
+
+Fluxo principal:
+O cliente envia uma requisição HTTP com os dados da transação ou depósito.
+
+A API recebe a requisição, valida os dados e prepara a mensagem.
+
+Após isso, os dados são enviados para o tópico principal do Kafka (TRANSACTIONS_TOPIC).
+
+Outros serviços que consomem esse tópico recebem a mensagem e fazem o processamento necessário.
+
+Em caso de erro no envio:
+Se der algum erro ao enviar a mensagem, a API tenta reenviar automaticamente até 3 vezes, com um intervalo de 5 segundos entre as tentativas.
+
+Se mesmo assim não funcionar, a mensagem é enviada para um tópico de erros (DLT – TOPIC_TRANSACTIONS.DLT).
+
+Reprocessamento do DLT:
+Existe um consumidor escutando o tópico DLT. Quando uma mensagem cai lá, esse consumidor tenta reenviar para o tópico original.
+
+Esse reprocessamento também tem um limite de 3 tentativas, controlado pelo header retryCount.
+
+Se estourar esse limite, a mensagem continua no DLT, mas não será mais processada automaticamente.
+
+Caso necessário, dá pra criar um endpoint depois pra reprocessar essas mensagens manualmente.
+
+
+
 
 ## **Swagger**
  http://localhost:8080/producer-service/swagger-ui/index.html
