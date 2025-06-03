@@ -1,5 +1,6 @@
 package com.banco.transaction_producer_service.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -35,6 +36,9 @@ public class DepositRequest {
     @NotNull(message = "O valor do depósito não pode ser nulo.")
     @Positive(message = "O valor do depósito deve ser maior que zero.")
     private Double amount;
+
+    @JsonIgnore
+    private TransactionTypeEnum transactionType;
 
     @Schema(description = "Proprietário da conta",  required = true)
     @Valid

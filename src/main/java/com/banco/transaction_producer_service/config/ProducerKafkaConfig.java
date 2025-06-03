@@ -38,12 +38,7 @@ public class ProducerKafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, DepositRequest> depositKafkaTemplate() {
-        return kafkaTemplate();
-    }
-
-    @Bean
-    public KafkaTemplate<String, TransactionWithAccount> transactionKafkaTemplate() {
+    public KafkaTemplate<String, Object> depositKafkaTemplate() {
         return kafkaTemplate();
     }
 
